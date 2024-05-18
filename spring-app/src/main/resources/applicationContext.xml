@@ -7,8 +7,6 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
 
-     <bean id="musicBean"
-          class="edu.springcourse.JazzMusic">
-    </bean>
+    <context:component-scan base-package="edu.springcourse"/>
 
 </beans>
