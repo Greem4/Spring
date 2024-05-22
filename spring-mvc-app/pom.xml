@@ -11,10 +11,10 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.7</maven.compiler.source>
-        <maven.compiler.target>1.7</maven.compiler.target>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
 
-        <version.sptring>5.2.1.RELEASE</version.sptring>
+        <version.sptring>6.1.7</version.sptring>
     </properties>
 
     <dependencies>
@@ -53,14 +53,21 @@
 
         <dependency>
             <groupId>org.thymeleaf</groupId>
-            <artifactId>thymeleaf-spring5</artifactId>
-            <version>3.0.11.RELEASE</version>
+            <artifactId>thymeleaf-spring6</artifactId>
+            <version>3.1.2.RELEASE</version>
         </dependency>
 
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
             <version>4.0.1</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <version>6.1.0-M2</version>
             <scope>provided</scope>
         </dependency>
 
