@@ -24,13 +24,13 @@ public class App {
         try {
             session.beginTransaction();
 
-            Person person = session.get(Person.class, 5);
-            Item item = session.get(Item.class, 1);
+            Person person = new Person("Test cascading", 30);
 
-            item.getOwner().getItems().remove(item);
+            person.addItem(new Item("Item 1"));
+            person.addItem(new Item("Item 2"));
+            person.addItem(new Item("Item 3"));
 
-            item.setOwner(person);
-            person.getItems().add(item);
+            session.save(person);
 
             session.getTransaction().commit();
 
