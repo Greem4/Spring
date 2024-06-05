@@ -23,25 +23,37 @@ public class PersonDAO {
     public List<Person> index() {
         Session session = sessionFactory.getCurrentSession();
 
-        List<Person> people = session.createQuery("select p from Person p", Person.class)
+        return session.createQuery("select p from Person p", Person.class)
                 .getResultList();
-
-        return people;
     }
 
 
+    @Transactional(readOnly = true)
     public Person show(int id) {
-        return null;
+        Session session = sessionFactory.getCurrentSession();
+        return session.get(Person.class, id);
     }
 
+    @Transactional
     public void save(Person person) {
+        Session session = sessionFactory.getCurrentSession();
+        session.saveOrUpdate(person);
     }
 
+    @Transactional
     public void update(int id, Person updatePerson) {
+        Session session = sessionFactory.getCurrentSession();
+        Person personToBeUpdate = session.get(Person.class, id);
+
+        personToBeUpdate.setName(updatePerson.getName());
+        personToBeUpdate.setAge(updatePerson.getAge());
+        personToBeUpdate.setEmail(updatePerson.getEmail());
     }
 
+    @Transactional
     public void delete(int id) {
-
+        Session session = sessionFactory.getCurrentSession();
+        session.remove(session.get(Person.class, id));
     }
 
 }
