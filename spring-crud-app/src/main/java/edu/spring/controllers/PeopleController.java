@@ -3,6 +3,7 @@ package edu.spring.controllers;
 import edu.spring.config.util.PersonValidator;
 import edu.spring.dao.PersonDAO;
 import edu.spring.models.Person;
+import edu.spring.services.ItemService;
 import edu.spring.services.PeopleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,18 +19,26 @@ import javax.validation.Valid;
 public class PeopleController {
 
     private final PeopleService peopleService;
+    private final ItemService itemService;
 
     private final PersonValidator personValidator;
 
     @Autowired
-    public PeopleController(PersonDAO personDAO, PeopleService peopleService, PersonValidator personValidator) {
+    public PeopleController(PersonDAO personDAO, PeopleService peopleService, ItemService itemService, PersonValidator personValidator) {
         this.peopleService = peopleService;
+        this.itemService = itemService;
         this.personValidator = personValidator;
     }
 
     @GetMapping
     public String index(Model model) {
         model.addAttribute("people", peopleService.findAll());
+
+        itemService.findByItemName("Airpods");
+        itemService.finByOwner(peopleService.findAll().get(0));
+
+        peopleService.test();
+
         // Получим всех людей из DAO и передадим на отображение в представление
         return "people/index";
     }

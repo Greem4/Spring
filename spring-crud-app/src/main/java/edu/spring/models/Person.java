@@ -2,6 +2,7 @@ package edu.spring.models;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.util.List;
 
 @Entity
 @Table(name = "Person")
@@ -24,6 +25,9 @@ public class Person {
     @Email(message = "Email should be valid")
     @Column(name = "email")
     private String email;
+
+    @OneToMany(mappedBy = "owner")
+    private List<Item> items;
 
     public Person() {
     }
@@ -64,5 +68,16 @@ public class Person {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", age=" + age +
+                ", email='" + email + '\'' +
+                ", items=" + items +
+                '}';
     }
 }
