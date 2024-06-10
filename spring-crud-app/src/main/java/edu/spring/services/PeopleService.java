@@ -33,9 +33,9 @@ public class PeopleService {
 
     @Transactional
     public void save(Person person) {
-        person.setCreatedAt(new Date());
+//        person.setCreatedAt(new Date());
 
-        person.setMood(Mood.CAlM);
+//        person.setMood(Mood.CAlM);
 
         peopleRepository.save(person);
     }

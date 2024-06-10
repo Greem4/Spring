@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "Person")
@@ -29,17 +30,17 @@ public class Person {
     @Column(name = "email")
     private String email;
 
-    @Column(name = "date_of_birth")
-    @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
-    private Date dateOfBirth;
+//    @Column(name = "date_of_birth")
+//    @Temporal(TemporalType.DATE)
+//    @DateTimeFormat(pattern = "dd/MM/yyyy")
+//    private Date dateOfBirth;
+//
+//    @Column(name = "created_at")
+//    @Temporal(TemporalType.TIMESTAMP)
+//    private Date createdAt;
 
-    @Column(name = "created_at")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createdAt;
-
-    @Enumerated(EnumType.STRING)
-    private Mood mood;
+//    @Enumerated(EnumType.STRING)
+//    private Mood mood;
 
     @OneToMany(mappedBy = "owner")
     private List<Item> items;
@@ -85,21 +86,21 @@ public class Person {
         this.email = email;
     }
 
-    public Date getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public void setDateOfBirth(Date dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
-
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
+//    public Date getDateOfBirth() {
+//        return dateOfBirth;
+//    }
+//
+//    public void setDateOfBirth(Date dateOfBirth) {
+//        this.dateOfBirth = dateOfBirth;
+//    }
+//
+//    public Date getCreatedAt() {
+//        return createdAt;
+//    }
+//
+//    public void setCreatedAt(Date createdAt) {
+//        this.createdAt = createdAt;
+//    }
 
     public List<Item> getItems() {
         return items;
@@ -109,13 +110,13 @@ public class Person {
         this.items = items;
     }
 
-    public Mood getMood() {
-        return mood;
-    }
-
-    public void setMood(Mood mood) {
-        this.mood = mood;
-    }
+//    public Mood getMood() {
+//        return mood;
+//    }
+//
+//    public void setMood(Mood mood) {
+//        this.mood = mood;
+//    }
 
     @Override
     public String toString() {
@@ -126,5 +127,18 @@ public class Person {
                 ", email='" + email + '\'' +
                 ", items=" + items +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Person person = (Person) o;
+        return id == person.id && age == person.age && Objects.equals(name, person.name) && Objects.equals(email, person.email) && Objects.equals(items, person.items);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, age, email, items);
     }
 }

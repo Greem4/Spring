@@ -18,12 +18,12 @@ public class AdminController {
         this.personDAO = personDAO;
     }
 
-    @GetMapping
-    public String adminPage(Model model, @ModelAttribute("person")Person person) {
-        model.addAttribute("people", personDAO.index());
-
-        return "adminPage";
-    }
+//    @GetMapping
+//    public String adminPage(Model model, @ModelAttribute("person")Person person) {
+//        model.addAttribute("people", personDAO.index());
+//
+//        return "adminPage";
+//    }
 
     @PatchMapping("/add")
     public String makeAdmin(@ModelAttribute("person") Person person) {

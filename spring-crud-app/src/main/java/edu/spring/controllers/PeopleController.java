@@ -20,7 +20,7 @@ public class PeopleController {
 
     private final PeopleService peopleService;
     private final ItemService itemService;
-
+    private final PersonDAO personDAO;
     private final PersonValidator personValidator;
 
     @Autowired
@@ -28,14 +28,13 @@ public class PeopleController {
         this.peopleService = peopleService;
         this.itemService = itemService;
         this.personValidator = personValidator;
+        this.personDAO = personDAO;
     }
 
     @GetMapping
     public String index(Model model) {
-        model.addAttribute("people", peopleService.findAll());
-
-        itemService.findByItemName("Airpods");
-        itemService.finByOwner(peopleService.findAll().get(0));
+//        model.addAttribute("people", peopleService.findAll());
+        personDAO.testNPlus1();
 
         peopleService.test();
 
