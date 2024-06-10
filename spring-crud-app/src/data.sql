@@ -192,3 +192,6 @@ insert into Item(person_id, item_name) VALUES (1, 'Tv');
 
 alter table Person add column date_of_birth date;
 alter table Person add column created_at timestamp;
+
+alter table Person add column mood int;
+alter table Person add column mood varchar;

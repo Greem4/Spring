@@ -1,5 +1,6 @@
 package edu.spring.services;
 
+import edu.spring.models.Mood;
 import edu.spring.models.Person;
 import edu.spring.repositories.PeopleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,8 @@ public class PeopleService {
     @Transactional
     public void save(Person person) {
         person.setCreatedAt(new Date());
+
+        person.setMood(Mood.CAlM);
 
         peopleRepository.save(person);
     }
