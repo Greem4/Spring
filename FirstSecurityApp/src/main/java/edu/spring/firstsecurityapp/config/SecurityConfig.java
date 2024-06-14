@@ -31,7 +31,7 @@ public class SecurityConfig   {
         // конфигурируем авторизацию
         http.csrf().disable()
                 .authorizeRequests()
-                .requestMatchers("/auth/login", "/error").permitAll()
+                .requestMatchers("/auth/login","/auth/registration", "/error").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/auth/login")
