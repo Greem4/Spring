@@ -6,6 +6,16 @@ CREATE TABLE Person
     password      varchar      not null
 );
 
-insert into Person(username, year_of_birth, password) values ('test_user1', 1960, 'test_password');
+ALTER TABLE Person
+    ADD COLUMN role varchar(100) NOT NULL;
 
-insert into Person(username, year_of_birth, password) values ('test_user2', 1960, 'test_password');
+insert into Person(username, year_of_birth, password)
+values ('test_user1', 1960, 'test_password');
+
+insert into Person(username, year_of_birth, password)
+values ('test_user2', 1960, 'test_password');
+
+TRUNCATE TABLE Person;
+
+UPDATE Person set role='ROLE_ADMIN' where id=9;
+
