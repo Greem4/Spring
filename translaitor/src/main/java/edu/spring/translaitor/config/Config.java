@@ -1,4 +1,4 @@
-package edu.spring.translaitor;
+package edu.spring.translaitor.config;
 
 import io.github.cdimascio.dotenv.Dotenv;
 

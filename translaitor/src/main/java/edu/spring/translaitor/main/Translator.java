@@ -1,5 +1,7 @@
-package edu.spring.translaitor;
+package edu.spring.translaitor.main;
 
+import edu.spring.translaitor.config.Config;
+import edu.spring.translaitor.service.TranslationService;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
 
 import java.util.Scanner;

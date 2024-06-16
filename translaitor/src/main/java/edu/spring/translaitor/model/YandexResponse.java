@@ -1,4 +1,4 @@
-package edu.spring.translaitor;
+package edu.spring.translaitor.model;
 
 import java.util.List;
 

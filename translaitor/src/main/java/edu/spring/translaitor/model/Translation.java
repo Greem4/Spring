@@ -1,4 +1,4 @@
-package edu.spring.translaitor;
+package edu.spring.translaitor.model;
 
 public class Translation {
     private String text;
