@@ -2,6 +2,7 @@ package edu.spring.firstrestapp.service;
 
 import edu.spring.firstrestapp.model.Person;
 import edu.spring.firstrestapp.repositories.PeopleRepository;
+import edu.spring.firstrestapp.util.PersonNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,6 +28,6 @@ public class PeopleService {
 
     public Person findOne(int id) {
         Optional<Person> foundPerson = peopleRepository.findById(id);
-        return foundPerson.orElse(null);
+        return foundPerson.orElseThrow(PersonNotFoundException::new);
     }
 }
