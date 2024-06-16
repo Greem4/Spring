@@ -11,3 +11,4 @@ if r.status_code == 404:
 else:
     person = r.json()
     print(f"Имя человека: {person['name']}")
+

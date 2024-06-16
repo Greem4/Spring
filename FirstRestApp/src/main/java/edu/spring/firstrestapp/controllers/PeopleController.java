@@ -3,10 +3,13 @@ package edu.spring.firstrestapp.controllers;
 import edu.spring.firstrestapp.model.Person;
 import edu.spring.firstrestapp.service.PeopleService;
 import edu.spring.firstrestapp.util.PersonErrorResponse;
-import edu.spring.firstrestapp.util.PersonNotFoundException;
+import edu.spring.firstrestapp.util.PersonNotCreatedException;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,14 +35,37 @@ public class PeopleController {
         return peopleService.findOne(id); // Jackson конвертирует в JSON
     }
 
-    @ExceptionHandler
-    private ResponseEntity<PersonErrorResponse> handlerException(PersonNotFoundException e) {
+    @PostMapping
+    public ResponseEntity<HttpStatus> create(@RequestBody @Valid Person person,
+                                             BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            StringBuilder errorsMsg = new StringBuilder();
+
+            List<FieldError> errors = bindingResult.getFieldErrors();
+            for (FieldError error : errors) {
+                errorsMsg.append(error.getField())
+                        .append(" - ")
+                        .append(error.getDefaultMessage())
+                        .append(";");
+            }
+
+            throw new PersonNotCreatedException(errorsMsg.toString());
+        }
+
+        peopleService.save(person);
+
+        // отправляем HTTP ответ с пустым телом и со статусом 200
+        return ResponseEntity.ok(HttpStatus.OK);
+    }
+
+    @ExceptionHandler(PersonNotCreatedException.class)
+    private ResponseEntity<PersonErrorResponse> handlerException(PersonNotCreatedException e) {
         PersonErrorResponse response = new PersonErrorResponse(
-                "Person with this id wasn't found! ",
+                e.getMessage(),
                 System.currentTimeMillis()
         );
 
-        // В  HTTP ответе тело ответа (response) и статус в заголовке
-        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND); // NOT_FOUND - 404 статус
+        // В HTTP ответе тело ответа (response) и статус в заголовке
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST); // NOT_FOUND - 404 статус
     }
 }
